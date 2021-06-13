@@ -16,4 +16,22 @@ int Solution::solve(vector<int> &A, int B) {
 }
 
 
-//
+//Optimised approach having time complexity o(nlog(n)) and space complexity o(n)
+int Solution::solve(vector<int> &A, int B) {
+    int n=A.size();
+    int count=0;
+    int Xor=0;
+    map<int,int> mp;
+    for(int i=0;i<n;i++)
+    {
+        Xor=A[i]^Xor;
+        if(Xor==B)
+        count++;
+        int y=Xor^B;
+        if(mp.find(y)!=mp.end())
+        count+=mp[y];
+        mp[Xor]+=1;
+    }
+    return count;
+}
+
